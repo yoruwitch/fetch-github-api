@@ -1,3 +1,9 @@
+
+import { searchUser } from "./services/user.js";
+import { searchRepositories } from "./services/repositories.js";
+import { user } from "./objects/user.js";
+
+
 let profileData = document.querySelector(".profile-data");
 let button = document.querySelector("#btn-search");
 let inputSearch = document.querySelector("#input-search");
@@ -17,35 +23,26 @@ inputSearch.addEventListener("keyup", (e) => {
     }
 });
 
-async function searchUser(userName) {
-    const response = await fetch(`https://api.github.com/users/${userName}`);
+async function getUserProfile(userName) {
 
-    return await response.json();
-}
+    const userResponse = await searchUser(userName);
+    console.log(userResponse)
 
-async function searchRepositories(userName) {
-    const response = await fetch(
-        `https://api.github.com/users/${userName}/repos`
-    );
 
-    return await response.json();
-}
+    // searchUser(userName).then((userData) => {
+    //     let userInfo = `
+    //     <div class="info">
+    //     <img src="${userData.avatar_url}" alt ="User profile pic"
+    //     <div class="data">
+    //         <h1>${userData.name ?? "No registered name😒"}</h1>
+    //         <p>${userData.bio ?? "No registered bio😒"}</p>
+    //     </div>
+    //     </div>`;
 
-function getUserProfile(userName) {
-    searchUser(userName).then((userData) => {
-        let userInfo = `
-        <div class="info">
-        <img src="${userData.avatar_url}" alt ="User profile pic"
-        <div class="data">
-            <h1>${userData.name ?? "No registered name😒"}</h1>
-            <p>${userData.bio ?? "No registered bio😒"}</p>
-        </div>
-        </div>`;
+    //     profileData.innerHTML = userInfo;
 
-        profileData.innerHTML = userInfo;
-
-        getUserRepositories(userName);
-    });
+    //     getUserRepositories(userName);
+    // });
 }
 
 function getUserRepositories(userName) {
@@ -62,4 +59,3 @@ function getUserRepositories(userName) {
     });
 }
 
-// getUserRepositories("isa56");
