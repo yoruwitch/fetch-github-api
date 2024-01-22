@@ -1,2 +1,4 @@
-# projeto-inicial-fetch-github-api
-Repositório contendo os arquivos iniciais do projeto de Fetch e GitHub API
+# Github and Fetch
+
+* Forked from inital project files from DevQuest and finished project.
+* This project searches for users on Github, show on screen informations like name, bio, avatar picture and repositories.
